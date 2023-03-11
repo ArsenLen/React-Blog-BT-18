@@ -1,23 +1,30 @@
 import './App.css';
+import Footer from './components/Footer/Footer';
+import Header from './components/Header/Header';
 import Hello from './components/Hello/Hello'
 
 function App() {
   return (
     <div className="App">
-      <h1>Приветствие</h1>
-      <Hello name="Arsen" age="25" />
-      <Hello name="Kenan" />
-      <Hello name="Kairat" />
+      <Header />
+        <Hello name="Arsen" age="25" />
+        <Hello name="Kenan" age="24" />
+        <Hello name="Kairat" age="20" />
+      <Footer />
     </div>
   );
 }
 
 export default App;
+// rsc - react statelles component - создать шаблон компонента React
 // Feature Slices 
 // БЭМ - методология
 // Компонент - функция, которая возвращает JSX(HTML+JS) разметку
 // CTRL+A - выделить все
 // CTRL+K+F - форматировать код
+
+// Декомпозиция - разделение кода компонента
+// Декомпозировать header и footer из App
 
 /*
   ДЗ. Создать Компонент Hobby
