@@ -1,12 +1,35 @@
+import { useState } from 'react';
 import './App.css';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
 import Hello from './components/Hello/Hello'
 
 function App() {
+  const [counterLeft, setCounterLeft] = useState(0) // [state, setFn]
+  const [counterRight, setCounterRight] = useState(0)
+  const [counterHistory, setCounterHistory] = useState('')
+
+  const handleLeft = () => {
+    setCounterHistory(counterHistory + ' L')
+    setCounterLeft(counterLeft + 1)
+  }
+
+  const handleRight = () => {
+    setCounterHistory(counterHistory + ' R')
+    setCounterRight(counterRight + 1)
+  }
+
+  
+
   return (
     <div className="App">
       <Header />
+        <p style={{fontSize: '60px'}}>Клик левой кнопки {counterLeft} </p>
+        <p style={{fontSize: '60px'}}>Клик правой кнопки {counterRight} </p>
+        <button onClick={handleLeft}>Клик левой</button>
+        <button onClick={handleRight}>Клик правой</button>
+        <h1>История кликов {counterHistory}</h1>
+        {/* Hello Components */}
         <Hello name="Arsen" age="25" />
         <Hello name="Kenan" age="24" />
         <Hello name="Kairat" age="20" />
