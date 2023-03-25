@@ -2,22 +2,9 @@ import { useState } from 'react';
 import './App.css';
 import Footer from './components/Footer/Footer';
 import Header from './components/Header/Header';
-import Hello from './components/Hello/Hello';
 import Posts from './components/Posts/Posts';
 
 function App() {
-  const [counterLeft, setCounterLeft] = useState(0) // [state, setFn]
-  const [counterRight, setCounterRight] = useState(0)
-  const [counterHistory, setCounterHistory] = useState('')
-
-  // if(true) {
-  //   const [number, setNumber] = useState(0)
-  // }
-
-  // for (let index = 0; index < array.length; index++) {
-  //   const [number, setNumber] = useState(0)
-  // }
-
   const posts = [
     {
       id: 1,
@@ -36,29 +23,10 @@ function App() {
     }
   ]
 
-  const handleLeft = () => {
-    setCounterHistory(counterHistory + ' L')
-    setCounterLeft(counterLeft + 1)
-  }
-
-  const handleRight = () => {
-    setCounterHistory(counterHistory + ' R')
-    setCounterRight(counterRight + 1)
-  }
-
   return (
     <div className="App">
       <Header />
         <Posts posts={posts} />
-        <p style={{fontSize: '60px'}}>Клик левой кнопки {counterLeft} </p>
-        <p style={{fontSize: '60px'}}>Клик правой кнопки {counterRight} </p>
-        <button onClick={handleLeft}>Клик левой</button>
-        <button onClick={handleRight}>Клик правой</button>
-        <h1>История кликов {counterHistory}</h1>
-        {/* Hello Components */}
-        <Hello name="Arsen" age="25" />
-        <Hello name="Kenan" age="24" />
-        <Hello name="Kairat" age="20" />
       <Footer />
     </div>
   );
