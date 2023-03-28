@@ -4,9 +4,9 @@ import styles from './post.module.css';
 const Post = (props) => {
     // { post: {id, title, published} }  const {post} = props
     return (
-        <div>
+        <div className={styles.post}>
             <p className={styles.title}>{props.post.title}</p>
-            <p>{props.post.published ? 'Опубликовано' : 'Не опубликовано'}</p>
+            <p className={styles.published}>{props.post.published ? 'Опубликовано' : 'Не опубликовано'}</p>
         </div>
     );
 };

@@ -4,6 +4,7 @@ import Post from '../Post/Post';
 const Posts = (props) => {
     const [posts, setPosts] = useState(props.posts)
     const [newPost, setNewPost] = useState('')
+    const [showAll, setShowAll] = useState(false)
 
     const addPost = (event) => {
         event.preventDefault()
@@ -16,9 +17,16 @@ const Posts = (props) => {
         setNewPost('')
     }
 
+    const postsToShow = showAll ? posts : posts.filter(post => post.published) 
+
     return (
         <div>
-            {posts.map(post => {
+            <div>
+                <button onClick={() => setShowAll(!showAll)}> 
+                    Показать {showAll ? 'опубликованные' : 'все'}
+                </button>
+            </div>
+            {postsToShow.map(post => {
                 return ( 
                     <Post key={post.id} post={post} />
                 )
@@ -36,6 +44,11 @@ const Posts = (props) => {
 };
 
 export default Posts;
+
+// По нажатию на кнопку отображать либо все посты, либо только опубликованные
+// текст в кнопке меняется в зависимости от отображаемых постов
+
+// if(num !== 20)  !true = false  !false = true
 
 /*
     props = {
