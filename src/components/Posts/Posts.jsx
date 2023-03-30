@@ -1,10 +1,23 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Post from '../Post/Post';
+import axios from 'axios';
 
-const Posts = (props) => {
-    const [posts, setPosts] = useState(props.posts)
+const getPosts = () => {
+    return axios.get('http://localhost:3001/posts')
+    // return fetch('http://localhost:3001/posts').then(res => res.json())
+}
+
+const Posts = () => {
+    const [posts, setPosts] = useState([])
     const [newPost, setNewPost] = useState('')
     const [showAll, setShowAll] = useState(false)
+
+    useEffect(() => {
+        getPosts()
+        .then(res => {
+          setPosts(res.data)
+        }) 
+      }, [])
 
     const addPost = (event) => {
         event.preventDefault()
