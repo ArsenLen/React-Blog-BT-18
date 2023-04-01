@@ -7,6 +7,14 @@ const getPosts = () => {
     // return fetch('http://localhost:3001/posts').then(res => res.json())
 }
 
+const createPost = (newPost) => {
+    return axios.post('http://localhost:3001/posts', newPost)
+}
+
+const editPost = (url, published) => {
+    return axios.patch(url, published)
+}
+
 const Posts = () => {
     const [posts, setPosts] = useState([])
     const [newPost, setNewPost] = useState('')
@@ -22,12 +30,20 @@ const Posts = () => {
     const addPost = (event) => {
         event.preventDefault()
         const postObject = {
-            id: posts.length + 1,
             title: newPost,
             published: Math.random() > 0.5
-        }    
-        setPosts(posts.concat(postObject)) // [{}, {}, {}].concat({}) -> 
+        }
+        createPost(postObject)
+            .then(res => setPosts(posts.concat(res.data)))   // [{}, {}, {}].concat({}) -> 
         setNewPost('')
+    }
+
+    const togglePublished = (id, published) => {
+        const url = `http://localhost:3001/posts/${id}`
+        const editedInfo = {
+            "published" : !published
+        }
+        editPost(url, editedInfo)
     }
 
     const postsToShow = showAll ? posts : posts.filter(post => post.published) 
@@ -41,7 +57,11 @@ const Posts = () => {
             </div>
             {postsToShow.map(post => {
                 return ( 
-                    <Post key={post.id} post={post} />
+                    <Post 
+                        key={post.id} 
+                        post={post}
+                        togglePublished={togglePublished}
+                    />
                 )
             } ) }
             <form onSubmit={addPost}>
@@ -111,4 +131,12 @@ export default Posts;
             0.4 > 0.5 - false
             0.5 > 0.5 - false
             0.7 > 0.5 - true
+
+
+
+            const addPost = () => {
+                const num = 10
+                console.log(num)
+            }
+            console.log(num) // num is not defined
 */

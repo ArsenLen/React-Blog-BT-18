@@ -7,6 +7,9 @@ const Post = (props) => {
         <div className={styles.post}>
             <p className={styles.title}>{props.post.title}</p>
             <p className={styles.published}>{props.post.published ? 'Опубликовано' : 'Не опубликовано'}</p>
+            <button onClick={() => props.togglePublished(props.post.id, props.post.published)}>
+                { props.post.published ? "В ожидании" : "Опубликовать" }
+            </button>
         </div>
     );
 };

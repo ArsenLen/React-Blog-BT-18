@@ -1,9 +1,9 @@
 {
   "posts": [
     {
-      "id": 1,
       "title": "My first post",
-      "published": true
+      "published": false,
+      "id": 1
     },
     {
       "id": 2,
@@ -14,6 +14,26 @@
       "id": 3,
       "title": "My third post",
       "published": true
+    },
+    {
+      "title": "Test",
+      "published": true,
+      "id": 4
+    },
+    {
+      "title": "Test",
+      "published": true,
+      "id": 5
+    },
+    {
+      "title": "Test",
+      "published": false,
+      "id": 6
+    },
+    {
+      "title": "Hello",
+      "published": false,
+      "id": 7
     }
   ]
 }
