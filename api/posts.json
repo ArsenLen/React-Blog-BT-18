@@ -1,8 +1,8 @@
 {
   "posts": [
     {
-      "title": "My first post",
-      "published": false,
+      "published": true,
+      "title": "The first title",
       "id": 1
     },
     {
@@ -13,7 +13,7 @@
     {
       "id": 3,
       "title": "My third post",
-      "published": true
+      "published": false
     },
     {
       "title": "Test",

@@ -41,9 +41,20 @@ const Posts = () => {
     const togglePublished = (id, published) => {
         const url = `http://localhost:3001/posts/${id}`
         const editedInfo = {
-            "published" : !published
+            "published" : !published 
         }
+        console.log(posts, id)
         editPost(url, editedInfo)
+            .then(res => {
+                setPosts(posts.map(post => post.id === id ? res.data : post)) // [...posts, ]
+            })
+            .catch(err => console.log(err))
+            // уведомление о том, что прошло успешно
+    }
+
+    const deletePost = () => {
+        // написать алгоритм удаления с сервера и перерисовки после успешного удаления
+        console.log('удалить')
     }
 
     const postsToShow = showAll ? posts : posts.filter(post => post.published) 
@@ -61,6 +72,7 @@ const Posts = () => {
                         key={post.id} 
                         post={post}
                         togglePublished={togglePublished}
+                        deletePost={deletePost}
                     />
                 )
             } ) }

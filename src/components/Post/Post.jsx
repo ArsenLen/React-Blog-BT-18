@@ -10,6 +10,9 @@ const Post = (props) => {
             <button onClick={() => props.togglePublished(props.post.id, props.post.published)}>
                 { props.post.published ? "В ожидании" : "Опубликовать" }
             </button>
+            <button onClick={() => props.deletePost()}>
+                Удалить
+            </button>
         </div>
     );
 };
