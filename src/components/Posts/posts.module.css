@@ -1,0 +1,32 @@
+.wrapper-grid {
+    display: flex;
+    flex-wrap: wrap;
+}
+.wrapper-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+
+/*
+    styles = {
+        "wrapper-grid": {
+            display: flex
+        },
+        wrapper-list : {
+
+        }
+    }
+
+    styles.wrapper-list
+
+    let user = {
+        user-name: "Arsen"
+    }
+    user[user-name]
+
+    let user = {
+        userName: "Arsen",
+    }
+    user.userName
+*/

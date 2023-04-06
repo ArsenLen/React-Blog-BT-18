@@ -1,27 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import Post from '../Post/Post';
-import axios from 'axios';
-
-const getPosts = () => {
-    return axios.get('http://localhost:3001/posts')
-    // return fetch('http://localhost:3001/posts').then(res => res.json())
-}
-
-const createPost = (newPost) => {
-    return axios.post('http://localhost:3001/posts', newPost)
-}
-
-const editPost = (url, published) => {
-    return axios.patch(url, published)
-}
+import postService from '../../services/posts'; // {get: getPosts, create: createPost}
+import styles from './posts.module.css'
 
 const Posts = () => {
     const [posts, setPosts] = useState([])
     const [newPost, setNewPost] = useState('')
     const [showAll, setShowAll] = useState(false)
+    const [wrapper, setWrapper] = useState("wrapper-grid")
 
     useEffect(() => {
-        getPosts()
+        postService
+        .get()
         .then(res => {
           setPosts(res.data)
         }) 
@@ -33,18 +23,18 @@ const Posts = () => {
             title: newPost,
             published: Math.random() > 0.5
         }
-        createPost(postObject)
+        postService
+            .create(postObject)
             .then(res => setPosts(posts.concat(res.data)))   // [{}, {}, {}].concat({}) -> 
         setNewPost('')
     }
 
     const togglePublished = (id, published) => {
-        const url = `http://localhost:3001/posts/${id}`
         const editedInfo = {
             "published" : !published 
         }
-        console.log(posts, id)
-        editPost(url, editedInfo)
+        postService
+            .edit(id, editedInfo)
             .then(res => {
                 setPosts(posts.map(post => post.id === id ? res.data : post)) // [...posts, ]
             })
@@ -62,20 +52,28 @@ const Posts = () => {
     return (
         <div>
             <div>
+                <button onClick={() => setWrapper("wrapper-list")}>
+                    Список
+                </button>
+                <button onClick={() => setWrapper("wrapper-grid")}>
+                    Сетка
+                </button>
                 <button onClick={() => setShowAll(!showAll)}> 
                     Показать {showAll ? 'опубликованные' : 'все'}
                 </button>
             </div>
-            {postsToShow.map(post => {
-                return ( 
-                    <Post 
-                        key={post.id} 
-                        post={post}
-                        togglePublished={togglePublished}
-                        deletePost={deletePost}
-                    />
-                )
-            } ) }
+            <div className={styles[wrapper]}> {/* wrapper = "wrapper-grid" */}
+                {postsToShow.map(post => {
+                    return ( 
+                        <Post 
+                            key={post.id} 
+                            post={post}
+                            togglePublished={togglePublished}
+                            deletePost={deletePost}
+                        />
+                    )
+                } ) }
+            </div>
             <form onSubmit={addPost}>
                 <input 
                     type="text" 
@@ -89,6 +87,11 @@ const Posts = () => {
 };
 
 export default Posts;
+
+/*
+    Создать кнопку "Сетка 3"
+    При нажатии на кнопку отображать по 3 элемента в одной строке
+*/
 
 // По нажатию на кнопку отображать либо все посты, либо только опубликованные
 // текст в кнопке меняется в зависимости от отображаемых постов
